@@ -20,11 +20,27 @@ class App extends Component {
         console.log(err);
       });
   }
+
+  onsearchCahnge = (e) => {
+    console.log("event.target.value", e.target.value);
+    console.log({ startingArray: this.state.monsters });
+    const searchedString = e.target.value.toLocaleLowerCase();
+
+    this.setState(
+      () => {
+        return { searchedString };
+      },
+      () => {
+        console.log({ endingArray: this.state.monsters });
+      }
+    );
+  };
   render() {
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name
-        .toLocaleLowerCase()
-        .includes(this.state.searchedString);
+    console.log("start rendering ");
+    const { monsters, searchedString } = this.state;
+    const { onsearchCahnge } = this;
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchedString);
     });
     console.log("render", filteredMonsters);
     return (
@@ -33,20 +49,7 @@ class App extends Component {
           className="search -box"
           type="search"
           placeholder="search monsters"
-          onChange={(e) => {
-            console.log("event.target.value", e.target.value);
-            console.log({ startingArray: this.state.monsters });
-            const searchedString = e.target.value.toLocaleLowerCase();
-
-            this.setState(
-              () => {
-                return { searchedString };
-              },
-              () => {
-                console.log({ endingArray: this.state.monsters });
-              }
-            );
-          }}
+          onChange={onsearchCahnge}
         />
 
         {filteredMonsters.map((monster) => {
