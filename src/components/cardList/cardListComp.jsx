@@ -8,7 +8,17 @@ class CardListComp extends Component {
     return (
       <div className="card-list">
         {monsters.map((monster) => {
-          return <h1 key={monster.id}>{monster.name}</h1>;
+          const { name, id, email } = monster;
+          return (
+            <div className="card-container" key={id}>
+              <img
+                alt={`monsters ${name}`}
+                src={`https://robohash.org/${id}?set=set2`}
+              />
+              <h1>{name}</h1>
+              <h1>{email}</h1>
+            </div>
+          );
         })}
       </div>
     );
