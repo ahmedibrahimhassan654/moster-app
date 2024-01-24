@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./search-box.styles.css";
 class SearchBoxComp extends Component {
   render() {
     console.log("get all props from inside SearchBoxComp", this.props);
