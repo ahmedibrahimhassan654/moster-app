@@ -40,6 +40,7 @@ class App extends Component {
     return (
       <>
         <div className="App">
+          <h1 className="app-title"> Monsters rolodex </h1>
           {/* 
           <input
             className="search-box"
