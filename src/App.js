@@ -25,7 +25,7 @@ const App = () => {
       return monster.name.toLocaleLowerCase().includes(searchedString);
     });
     setFilteredMonsters(newfilteredMonsters);
-    console.log("side effect ");
+
   }, [monsters, searchedString]);
 
   const onsearchCahnge = (e) => {
