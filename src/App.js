@@ -8,7 +8,6 @@ const App = () => {
   const [searchedString, setsearchedString] = useState("");
   const [monsters, setmonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
-  const [anothersearchstringField, setAnothersearchstringField] = useState("");
   console.log("render");
 
   useEffect(() => {
@@ -34,30 +33,11 @@ const App = () => {
     setsearchedString(searchedStringField);
   };
 
-  const onthesecondsearchFieldCahnge = (e) => {
-    const searchedStringField = e.target.value.toLocaleLowerCase();
-    setAnothersearchstringField(searchedStringField);
-  };
-  // const filteredMonsters = monsters.filter((monster) => {
-  //   return monster.name.toLocaleLowerCase().includes(searchedString);
-  // });
-
   return (
     <div className="App">
       <h1 className="app-title"> Monsters rolodex </h1>
 
-      {/* <input
-        className="search-box"
-        type="search"
-        placeholder="search monsters"
-        onChange={onsearchCahnge}
-      /> */}
-
       <SearchBoxComp onsearch={onsearchCahnge} placeholder="search monster " />
-      <SearchBoxComp
-        onsearch={onthesecondsearchFieldCahnge}
-        placeholder="second string"
-      />
 
       <CardListComp monsters={filteredMonsters} />
     </div>
