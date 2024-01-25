@@ -1,56 +1,31 @@
-import { Component } from "react";
+import { useState } from "react";
 
 import "./App.css";
 import CardListComp from "./components/cardList/cardListComp";
 import SearchBoxComp from "./components/searchComp/searchBoxComp";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      monsters: [],
-      searchedString: "",
-    };
-  }
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => {
-        this.setState({ monsters: users });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+const App = () => {
+  const [searchedString, setsearchedString] = useState("");
 
-  onsearchCahnge = (e) => {
-    const searchedString = e.target.value.toLocaleLowerCase();
-
-    this.setState(() => {
-      return { searchedString };
-    });
+  console.log({searchedString});
+  const onsearchCahnge = (e) => {
+    const searchedStringField = e.target.value.toLocaleLowerCase();
+    setsearchedString(searchedStringField);
   };
-  render() {
-    const { monsters, searchedString } = this.state;
-    const { onsearchCahnge } = this;
-    const filteredMonsters = monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(searchedString);
-    });
 
-    return (
-      <>
-        <div className="App">
-          <h1 className="app-title"> Monsters rolodex </h1>
-          {/* 
-          <input
-            className="search-box"
-            type="search"
-            placeholder="search monsters"
-            onChange={onsearchCahnge}
-          />
-            */}
-          <SearchBoxComp onsearch={onsearchCahnge} />
-          {/* 
+  return (
+    <div className="App">
+      <h1 className="app-title"> Monsters rolodex </h1>
+
+      <input
+        className="search-box"
+        type="search"
+        placeholder="search monsters"
+        onChange={onsearchCahnge}
+      />
+
+      {/*  <SearchBoxComp onsearch={onsearchCahnge} /> */}
+      {/* 
           {filteredMonsters.map((monster) => {
             return (
               <div key={monster.id}>
@@ -59,11 +34,70 @@ class App extends Component {
             );
           })}
           */}
-          <CardListComp monsters={filteredMonsters} />
-        </div>
-      </>
-    );
-  }
-}
+      {/*  <CardListComp monsters={filteredMonsters} /> */}
+    </div>
+  );
+};
+// class App extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       monsters: [],
+//       searchedString: "",
+//     };
+//   }
+//   componentDidMount() {
+//     fetch("https://jsonplaceholder.typicode.com/users")
+//       .then((response) => response.json())
+//       .then((users) => {
+//         this.setState({ monsters: users });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+
+//   onsearchCahnge = (e) => {
+//     const searchedString = e.target.value.toLocaleLowerCase();
+
+//     this.setState(() => {
+//       return { searchedString };
+//     });
+//   };
+//   render() {
+//     const { monsters, searchedString } = this.state;
+//     const { onsearchCahnge } = this;
+//     const filteredMonsters = monsters.filter((monster) => {
+//       return monster.name.toLocaleLowerCase().includes(searchedString);
+//     });
+
+//     return (
+//       <>
+//         <div className="App">
+//           <h1 className="app-title"> Monsters rolodex </h1>
+//           {/*
+//           <input
+//             className="search-box"
+//             type="search"
+//             placeholder="search monsters"
+//             onChange={onsearchCahnge}
+//           />
+//             */}
+//           <SearchBoxComp onsearch={onsearchCahnge} />
+//           {/*
+//           {filteredMonsters.map((monster) => {
+//             return (
+//               <div key={monster.id}>
+//                 <p>{monster.name}</p>;
+//               </div>
+//             );
+//           })}
+//           */}
+//           <CardListComp monsters={filteredMonsters} />
+//         </div>
+//       </>
+//     );
+//   }
+// }
 
 export default App;
